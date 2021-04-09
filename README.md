@@ -1,24 +1,87 @@
-# README
+# Integrating GraphQL with ruby on rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is a basic sekeleton of Author Library system. The application is built in ruby on rails and is using GRAPHQL for data manipulation. 
 
-Things you may want to cover:
+This project is Walk through application presented in [RubyConf Pakistan.](https://docs.google.com/presentation/d/1v1UWGiOIxk8cAbxddfLW3kEL7S02K46NdzZDTA2FuQw/edit?usp=sharing)
 
-* Ruby version
 
-* System dependencies
+# Queries 
+> **FETCH LIST OF AUTHORS WITH ALL DETAILS(BOOKS AND CHAPTERS)**
 
-* Configuration
+```
+query{
+  authors {
+    id
+    name
+    bookCount
+    books {
+      name
+      description
+      chapters {
+        name
+        shortDescription
+        authorName
+      }
+    }
+  }
+}
 
-* Database creation
+```
 
-* Database initialization
+> **FETCH SINGLE AUTHOR**
 
-* How to run the test suite
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+query{
+  author(id: 1) {
+    id
+    name
+    bookCount
+    books {
+      name
+      description
+      chapters {
+        name
+        shortDescription
+        authorName
+      }
+    }
+  }
+}
 
-* Deployment instructions
 
-* ...
+```
+# Mutations
+
+> **CREATE AUTHOR**
+
+```
+mutation{
+  createAuthor(input: {
+    name: "mehreen"
+    email: "mehreentahir18@gmail.com"
+  }){
+    author {
+      name
+      id
+    }
+    errors
+  }
+}
+```
+
+> **UPDATE AUTHOR**
+```
+mutation{
+  updateAuthor(input: {
+    id: "1"
+    name: "mehreen-abc"
+  }){
+    author {
+      name
+      id
+    }
+    errors
+  }
+}
+```
