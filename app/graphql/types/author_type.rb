@@ -3,7 +3,9 @@ module Types
     field :id, ID, null: false
     field :name, String, null: true
 
-    field :book_count, Integer, null: false
+    field :book_count, Integer, null: true
+
+    field :books, [Types::BookType], null: true
 
     def book_count
       object.books.count
